@@ -1,7 +1,0 @@
-module or_gate_1bit(
-    input a,
-    input b,
-    output out
-);
-    and or_gate(out, a, b);
-endmodule

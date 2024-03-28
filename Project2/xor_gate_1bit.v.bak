@@ -1,7 +1,0 @@
-module xor_gate_1bit(
-    input a,
-    input b,
-    output out
-);
-    xor xor_gate(out, a, b);
-endmodule
