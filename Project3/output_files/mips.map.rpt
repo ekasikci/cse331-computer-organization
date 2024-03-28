@@ -1,0 +1,1684 @@
+Analysis & Synthesis report for mips
+Thu Jan 18 23:37:59 2024
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |mips|alu:alu_inst|mod:mod_inst|mod_cu:control_unit|state
+  9. Registers Removed During Synthesis
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
+ 12. Port Connectivity Checks: "mux_2x1_32bit:mux_2x1_32bit_inst3"
+ 13. Port Connectivity Checks: "adder_32bit:branch_adder_inst"
+ 14. Port Connectivity Checks: "adder_32bit:pc_adder_inst"
+ 15. Port Connectivity Checks: "alu:alu_inst|adder_32bit:adder_inst"
+ 16. Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|or_gate_32bit:my_or"
+ 17. Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:perform_subtraction"
+ 18. Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b"
+ 19. Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst"
+ 20. Post-Synthesis Netlist Statistics for Top Partition
+ 21. Elapsed Time Per Partition
+ 22. Analysis & Synthesis Messages
+ 23. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Thu Jan 18 23:37:59 2024       ;
+; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name                   ; mips                                        ;
+; Top-level Entity Name           ; mips                                        ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 1                                           ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
+; Top-level entity name                                                           ; mips               ; mips               ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                  ;
++----------------------------------+-----------------+------------------------+---------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path    ; Library ;
++----------------------------------+-----------------+------------------------+---------------------------------+---------+
+; registers.mem                    ; yes             ; User Unspecified File  ; D:/project3/registers.mem       ;         ;
+; mips.v                           ; yes             ; User Verilog HDL File  ; D:/project3/mips.v              ;         ;
+; register_block.v                 ; yes             ; User Verilog HDL File  ; D:/project3/register_block.v    ;         ;
+; instruction_block.v              ; yes             ; User Verilog HDL File  ; D:/project3/instruction_block.v ;         ;
+; memory_block.v                   ; yes             ; User Verilog HDL File  ; D:/project3/memory_block.v      ;         ;
+; control_unit.v                   ; yes             ; User Verilog HDL File  ; D:/project3/control_unit.v      ;         ;
+; alu.v                            ; yes             ; User Verilog HDL File  ; D:/project3/alu.v               ;         ;
+; alu_control.v                    ; yes             ; User Verilog HDL File  ; D:/project3/alu_control.v       ;         ;
+; sign_extend.v                    ; yes             ; User Verilog HDL File  ; D:/project3/sign_extend.v       ;         ;
+; shift_left_2.v                   ; yes             ; User Verilog HDL File  ; D:/project3/shift_left_2.v      ;         ;
+; instructions.mem                 ; yes             ; User Unspecified File  ; D:/project3/instructions.mem    ;         ;
+; memory.mem                       ; yes             ; User Unspecified File  ; D:/project3/memory.mem          ;         ;
+; mux_8x1_1bit.v                   ; yes             ; User Verilog HDL File  ; D:/project3/mux_8x1_1bit.v      ;         ;
+; mux_8x1_32bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/mux_8x1_32bit.v     ;         ;
+; mux_2x1_1bit.v                   ; yes             ; User Verilog HDL File  ; D:/project3/mux_2x1_1bit.v      ;         ;
+; mux_2x1_5bit.v                   ; yes             ; User Verilog HDL File  ; D:/project3/mux_2x1_5bit.v      ;         ;
+; mux_2x1_32bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/mux_2x1_32bit.v     ;         ;
+; and_gate_32bit.v                 ; yes             ; User Verilog HDL File  ; D:/project3/and_gate_32bit.v    ;         ;
+; and_gate_1bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/and_gate_1bit.v     ;         ;
+; or_gate_1bit.v                   ; yes             ; User Verilog HDL File  ; D:/project3/or_gate_1bit.v      ;         ;
+; or_gate_32bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/or_gate_32bit.v     ;         ;
+; xor_gate_1bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/xor_gate_1bit.v     ;         ;
+; xor_gate_32bit.v                 ; yes             ; User Verilog HDL File  ; D:/project3/xor_gate_32bit.v    ;         ;
+; nor_gate_1bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/nor_gate_1bit.v     ;         ;
+; nor_gate_32bit.v                 ; yes             ; User Verilog HDL File  ; D:/project3/nor_gate_32bit.v    ;         ;
+; subtractor_32bit.v               ; yes             ; User Verilog HDL File  ; D:/project3/subtractor_32bit.v  ;         ;
+; less_than_32bit.v                ; yes             ; User Verilog HDL File  ; D:/project3/less_than_32bit.v   ;         ;
+; mod_dp.v                         ; yes             ; User Verilog HDL File  ; D:/project3/mod_dp.v            ;         ;
+; mod_cu.v                         ; yes             ; User Verilog HDL File  ; D:/project3/mod_cu.v            ;         ;
+; mod.v                            ; yes             ; User Verilog HDL File  ; D:/project3/mod.v               ;         ;
+; cla_level1_4bit.v                ; yes             ; User Verilog HDL File  ; D:/project3/cla_level1_4bit.v   ;         ;
+; cla_level2.v                     ; yes             ; User Verilog HDL File  ; D:/project3/cla_level2.v        ;         ;
+; full_adder_1bit.v                ; yes             ; User Verilog HDL File  ; D:/project3/full_adder_1bit.v   ;         ;
+; full_adder_4bit.v                ; yes             ; User Verilog HDL File  ; D:/project3/full_adder_4bit.v   ;         ;
+; adder_32bit.v                    ; yes             ; User Verilog HDL File  ; D:/project3/adder_32bit.v       ;         ;
+; and_gate_4bit.v                  ; yes             ; User Verilog HDL File  ; D:/project3/and_gate_4bit.v     ;         ;
+; or_gate_4bit.v                   ; yes             ; User Verilog HDL File  ; D:/project3/or_gate_4bit.v      ;         ;
++----------------------------------+-----------------+------------------------+---------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimate of Logic utilization (ALMs needed) ; 0     ;
+;                                             ;       ;
+; Combinational ALUT usage for logic          ; 0     ;
+;     -- 7 input functions                    ; 0     ;
+;     -- 6 input functions                    ; 0     ;
+;     -- 5 input functions                    ; 0     ;
+;     -- 4 input functions                    ; 0     ;
+;     -- <=3 input functions                  ; 0     ;
+;                                             ;       ;
+; Dedicated logic registers                   ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 1     ;
+;                                             ;       ;
+; Total DSP Blocks                            ; 0     ;
+;                                             ;       ;
+; Maximum fan-out node                        ; clock ;
+; Maximum fan-out                             ; 1     ;
+; Total fan-out                               ; 1     ;
+; Average fan-out                             ; 0.50  ;
++---------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+; |mips                      ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 1    ; 0            ; |mips               ; mips        ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------+
+; State Machine - |mips|alu:alu_inst|mod:mod_inst|mod_cu:control_unit|state ;
++----------------+-------------+-----------+--------------------------------+
+; Name           ; state.START ; state.END ; state.SUBTRACT                 ;
++----------------+-------------+-----------+--------------------------------+
+; state.START    ; 0           ; 0         ; 0                              ;
+; state.SUBTRACT ; 1           ; 0         ; 1                              ;
+; state.END      ; 1           ; 1         ; 0                              ;
++----------------+-------------+-----------+--------------------------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                   ;
++---------------------------------------------------------------+--------------------------------------+
+; Register name                                                 ; Reason for Removal                   ;
++---------------------------------------------------------------+--------------------------------------+
+; alu:alu_inst|mod:mod_inst|mod_cu:control_unit|subtract_enable ; Stuck at GND due to stuck port clock ;
+; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[0..31]       ; Stuck at GND due to stuck port clock ;
+; alu:alu_inst|mod:mod_inst|mod_dp:datapath|lt                  ; Stuck at GND due to stuck port clock ;
+; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[0..31]         ; Stuck at GND due to stuck port clock ;
+; pc[0..9]                                                      ; Lost fanout                          ;
+; alu:alu_inst|mod:mod_inst|mod_cu:control_unit|state.SUBTRACT  ; Lost fanout                          ;
+; alu:alu_inst|mod:mod_inst|mod_cu:control_unit|state.START     ; Lost fanout                          ;
+; alu:alu_inst|mod:mod_inst|mod_cu:control_unit|state.END       ; Stuck at GND due to stuck port clock ;
+; Total Number of Removed Registers = 79                        ;                                      ;
++---------------------------------------------------------------+--------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                     ;
++---------------------------------------------------------------+-------------------------+-------------------------------------------------------+
+; Register name                                                 ; Reason for Removal      ; Registers Removed due to This Register                ;
++---------------------------------------------------------------+-------------------------+-------------------------------------------------------+
+; alu:alu_inst|mod:mod_inst|mod_cu:control_unit|subtract_enable ; Stuck at GND            ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[0],  ;
+;                                                               ; due to stuck port clock ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[1],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[2],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[3],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[4],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[5],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[6],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[7],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[8],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[9],  ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[10], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[11], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[12], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[13], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[14], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[15], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[16], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[17], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[18], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[19], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[20], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[21], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[22], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[23], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[24], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[25], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[26], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[27], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[28], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[29], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[30], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|RESULT[31], ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[0],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[1],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[2],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[3],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[4],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[5],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[6],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[7],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[8],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[9],    ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[10],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[11],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[12],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[13],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[14],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[15],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[16],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[17],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[18],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[19],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[20],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[21],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[22],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[23],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[24],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[25],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[26],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[27],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[28],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[29],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[30],   ;
+;                                                               ;                         ; alu:alu_inst|mod:mod_inst|mod_dp:datapath|TEMP[31]    ;
++---------------------------------------------------------------+-------------------------+-------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------+
+; Port Connectivity Checks: "mux_2x1_32bit:mux_2x1_32bit_inst3" ;
++-----------+-------+----------+--------------------------------+
+; Port      ; Type  ; Severity ; Details                        ;
++-----------+-------+----------+--------------------------------+
+; in1[1..0] ; Input ; Info     ; Stuck at GND                   ;
++-----------+-------+----------+--------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "adder_32bit:branch_adder_inst"                                                      ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; c0   ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "adder_32bit:pc_adder_inst"                                                              ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; B[31..1] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; B[0]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; c0       ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cout     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst|adder_32bit:adder_inst"                                                ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; c0   ; Input  ; Info     ; Stuck at GND                                                                        ;
+; cout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|or_gate_32bit:my_or" ;
++----------+-------+----------+---------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                       ;
++----------+-------+----------+---------------------------------------------------------------+
+; A        ; Input ; Info     ; Stuck at GND                                                  ;
+; B[31..1] ; Input ; Info     ; Stuck at GND                                                  ;
++----------+-------+----------+---------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:perform_subtraction" ;
++------+-------+----------+----------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                        ;
++------+-------+----------+----------------------------------------------------------------------------------------------------------------+
+; c0   ; Input ; Info     ; Stuck at GND                                                                                                   ;
++------+-------+----------+----------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b" ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                     ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------+
+; B[31..1] ; Input  ; Info     ; Stuck at GND                                                                                                ;
+; B[0]     ; Input  ; Info     ; Stuck at VCC                                                                                                ;
+; c0       ; Input  ; Info     ; Stuck at GND                                                                                                ;
+; cout     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                         ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst"              ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; diff[30..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-------------------+---------------------------------+
+; Type              ; Count                           ;
++-------------------+---------------------------------+
+; boundary_port     ; 1                               ;
+;                   ;                                 ;
+; Max LUT depth     ; 0.00                            ;
+; Average LUT depth ; 0.00                            ;
++-------------------+---------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Thu Jan 18 23:37:42 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off mips -c mips
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file testbench.v
+    Info (12023): Found entity 1: testbench File: D:/project3/testbench.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mips.v
+    Info (12023): Found entity 1: mips File: D:/project3/mips.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file register_block.v
+    Info (12023): Found entity 1: register_block File: D:/project3/register_block.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file instruction_block.v
+    Info (12023): Found entity 1: instruction_block File: D:/project3/instruction_block.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file memory_block.v
+    Info (12023): Found entity 1: memory_block File: D:/project3/memory_block.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file control_unit.v
+    Info (12023): Found entity 1: control_unit File: D:/project3/control_unit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alu.v
+    Info (12023): Found entity 1: alu File: D:/project3/alu.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alu_control.v
+    Info (12023): Found entity 1: alu_control File: D:/project3/alu_control.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sign_extend.v
+    Info (12023): Found entity 1: sign_extend File: D:/project3/sign_extend.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file shift_left_2.v
+    Info (12023): Found entity 1: shift_left_2 File: D:/project3/shift_left_2.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_8x1_1bit.v
+    Info (12023): Found entity 1: mux_8x1_1bit File: D:/project3/mux_8x1_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_8x1_32bit.v
+    Info (12023): Found entity 1: mux_8x1_32bit File: D:/project3/mux_8x1_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_2x1_1bit.v
+    Info (12023): Found entity 1: mux_2x1_1bit File: D:/project3/mux_2x1_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_2x1_5bit.v
+    Info (12023): Found entity 1: mux_2x1_5bit File: D:/project3/mux_2x1_5bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux_2x1_32bit.v
+    Info (12023): Found entity 1: mux_2x1_32bit File: D:/project3/mux_2x1_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file and_gate_32bit.v
+    Info (12023): Found entity 1: and_gate_32bit File: D:/project3/and_gate_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file and_gate_1bit.v
+    Info (12023): Found entity 1: and_gate_1bit File: D:/project3/and_gate_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file or_gate_1bit.v
+    Info (12023): Found entity 1: or_gate_1bit File: D:/project3/or_gate_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file or_gate_32bit.v
+    Info (12023): Found entity 1: or_gate_32bit File: D:/project3/or_gate_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file xor_gate_1bit.v
+    Info (12023): Found entity 1: xor_gate_1bit File: D:/project3/xor_gate_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file xor_gate_32bit.v
+    Info (12023): Found entity 1: xor_gate_32bit File: D:/project3/xor_gate_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file nor_gate_1bit.v
+    Info (12023): Found entity 1: nor_gate_1bit File: D:/project3/nor_gate_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file nor_gate_32bit.v
+    Info (12023): Found entity 1: nor_gate_32bit File: D:/project3/nor_gate_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file subtractor_32bit.v
+    Info (12023): Found entity 1: subtractor_32bit File: D:/project3/subtractor_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file less_than_32bit.v
+    Info (12023): Found entity 1: less_than_32bit File: D:/project3/less_than_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mod_dp.v
+    Info (12023): Found entity 1: mod_dp File: D:/project3/mod_dp.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mod_cu.v
+    Info (12023): Found entity 1: mod_cu File: D:/project3/mod_cu.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mod.v
+    Info (12023): Found entity 1: mod File: D:/project3/mod.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cla_level1_4bit.v
+    Info (12023): Found entity 1: cla_level1_4bit File: D:/project3/cla_level1_4bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cla_level2.v
+    Info (12023): Found entity 1: cla_level2 File: D:/project3/cla_level2.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file full_adder_1bit.v
+    Info (12023): Found entity 1: full_adder_1bit File: D:/project3/full_adder_1bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file full_adder_4bit.v
+    Info (12023): Found entity 1: full_adder_4bit File: D:/project3/full_adder_4bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file adder_32bit.v
+    Info (12023): Found entity 1: adder_32bit File: D:/project3/adder_32bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file and_gate_4bit.v
+    Info (12023): Found entity 1: and_gate_4bit File: D:/project3/and_gate_4bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file or_gate_4bit.v
+    Info (12023): Found entity 1: or_gate_4bit File: D:/project3/or_gate_4bit.v Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at alu.v(21): created implicit net for "clk" File: D:/project3/alu.v Line: 21
+Warning (10236): Verilog HDL Implicit Net warning at alu.v(21): created implicit net for "reset" File: D:/project3/alu.v Line: 21
+Info (12127): Elaborating entity "mips" for the top level hierarchy
+Info (12128): Elaborating entity "instruction_block" for hierarchy "instruction_block:inst_block" File: D:/project3/mips.v Line: 13
+Warning (10850): Verilog HDL warning at instruction_block.v(11): number of words (5) in memory file does not match the number of elements in the address range [0:1023] File: D:/project3/instruction_block.v Line: 11
+Warning (10030): Net "instruction_memory.data_a" at instruction_block.v(6) has no driver or initial value, using a default initial value '0' File: D:/project3/instruction_block.v Line: 6
+Warning (10030): Net "instruction_memory.waddr_a" at instruction_block.v(6) has no driver or initial value, using a default initial value '0' File: D:/project3/instruction_block.v Line: 6
+Warning (10030): Net "instruction_memory.we_a" at instruction_block.v(6) has no driver or initial value, using a default initial value '0' File: D:/project3/instruction_block.v Line: 6
+Info (12128): Elaborating entity "control_unit" for hierarchy "control_unit:ctrl_unit" File: D:/project3/mips.v Line: 30
+Info (12128): Elaborating entity "alu_control" for hierarchy "alu_control:alu_control_inst" File: D:/project3/mips.v Line: 38
+Info (12128): Elaborating entity "mux_2x1_1bit" for hierarchy "alu_control:alu_control_inst|mux_2x1_1bit:mux0" File: D:/project3/alu_control.v Line: 30
+Info (12128): Elaborating entity "mux_2x1_5bit" for hierarchy "mux_2x1_5bit:mux_2x1_5bit_inst0" File: D:/project3/mips.v Line: 46
+Info (12128): Elaborating entity "register_block" for hierarchy "register_block:reg_block" File: D:/project3/mips.v Line: 59
+Warning (10175): Verilog HDL warning at register_block.v(24): ignoring unsupported system task File: D:/project3/register_block.v Line: 24
+Info (12128): Elaborating entity "sign_extend" for hierarchy "sign_extend:sign_extend_inst" File: D:/project3/mips.v Line: 66
+Info (12128): Elaborating entity "mux_2x1_32bit" for hierarchy "mux_2x1_32bit:mux_2x1_32bit_inst0" File: D:/project3/mips.v Line: 74
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_inst" File: D:/project3/mips.v Line: 85
+Info (12128): Elaborating entity "and_gate_32bit" for hierarchy "alu:alu_inst|and_gate_32bit:and_gate_inst" File: D:/project3/alu.v Line: 14
+Info (12128): Elaborating entity "and_gate_1bit" for hierarchy "alu:alu_inst|and_gate_32bit:and_gate_inst|and_gate_1bit:and0" File: D:/project3/and_gate_32bit.v Line: 7
+Info (12128): Elaborating entity "or_gate_32bit" for hierarchy "alu:alu_inst|or_gate_32bit:or_gate_inst" File: D:/project3/alu.v Line: 15
+Info (12128): Elaborating entity "or_gate_1bit" for hierarchy "alu:alu_inst|or_gate_32bit:or_gate_inst|or_gate_1bit:or0" File: D:/project3/or_gate_32bit.v Line: 7
+Info (12128): Elaborating entity "xor_gate_32bit" for hierarchy "alu:alu_inst|xor_gate_32bit:xor_gate_inst" File: D:/project3/alu.v Line: 16
+Info (12128): Elaborating entity "xor_gate_1bit" for hierarchy "alu:alu_inst|xor_gate_32bit:xor_gate_inst|xor_gate_1bit:xor0" File: D:/project3/xor_gate_32bit.v Line: 7
+Info (12128): Elaborating entity "nor_gate_32bit" for hierarchy "alu:alu_inst|nor_gate_32bit:nor_gate_inst" File: D:/project3/alu.v Line: 17
+Info (12128): Elaborating entity "nor_gate_1bit" for hierarchy "alu:alu_inst|nor_gate_32bit:nor_gate_inst|nor_gate_1bit:nor0" File: D:/project3/nor_gate_32bit.v Line: 8
+Info (12128): Elaborating entity "less_than_32bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst" File: D:/project3/alu.v Line: 18
+Info (12128): Elaborating entity "subtractor_32bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst" File: D:/project3/less_than_32bit.v Line: 13
+Info (12128): Elaborating entity "adder_32bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b" File: D:/project3/subtractor_32bit.v Line: 51
+Info (12128): Elaborating entity "cla_level2" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b|cla_level2:cla1" File: D:/project3/adder_32bit.v Line: 4
+Info (12128): Elaborating entity "cla_level1_4bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b|cla_level2:cla1|cla_level1_4bit:cla1" File: D:/project3/cla_level2.v Line: 5
+Info (12128): Elaborating entity "and_gate_4bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b|cla_level2:cla1|cla_level1_4bit:cla1|and_gate_4bit:and1" File: D:/project3/cla_level1_4bit.v Line: 7
+Info (12128): Elaborating entity "or_gate_4bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b|cla_level2:cla1|cla_level1_4bit:cla1|or_gate_4bit:or1" File: D:/project3/cla_level1_4bit.v Line: 8
+Info (12128): Elaborating entity "full_adder_4bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b|full_adder_4bit:fa1" File: D:/project3/adder_32bit.v Line: 6
+Info (12128): Elaborating entity "full_adder_1bit" for hierarchy "alu:alu_inst|less_than_32bit:less_than_inst|subtractor_32bit:subtractor_inst|adder_32bit:add_one_to_inverted_b|full_adder_4bit:fa1|full_adder_1bit:fa1" File: D:/project3/full_adder_4bit.v Line: 6
+Info (12128): Elaborating entity "mod" for hierarchy "alu:alu_inst|mod:mod_inst" File: D:/project3/alu.v Line: 21
+Info (12128): Elaborating entity "mod_dp" for hierarchy "alu:alu_inst|mod:mod_inst|mod_dp:datapath" File: D:/project3/mod.v Line: 11
+Info (12128): Elaborating entity "mod_cu" for hierarchy "alu:alu_inst|mod:mod_inst|mod_cu:control_unit" File: D:/project3/mod.v Line: 12
+Info (12128): Elaborating entity "mux_8x1_32bit" for hierarchy "alu:alu_inst|mux_8x1_32bit:mux_8x1_32bit_inst" File: D:/project3/alu.v Line: 35
+Info (12128): Elaborating entity "mux_8x1_1bit" for hierarchy "alu:alu_inst|mux_8x1_32bit:mux_8x1_32bit_inst|mux_8x1_1bit:mux0" File: D:/project3/mux_8x1_32bit.v Line: 2
+Info (12128): Elaborating entity "memory_block" for hierarchy "memory_block:memory_block_inst" File: D:/project3/mips.v Line: 96
+Warning (10850): Verilog HDL warning at memory_block.v(13): number of words (0) in memory file does not match the number of elements in the address range [0:127] File: D:/project3/memory_block.v Line: 13
+Warning (10855): Verilog HDL warning at memory_block.v(12): initial value for variable memory should be constant File: D:/project3/memory_block.v Line: 12
+Warning (10240): Verilog HDL Always Construct warning at memory_block.v(19): inferring latch(es) for variable "read_data", which holds its previous value in one or more paths through the always construct File: D:/project3/memory_block.v Line: 19
+Warning (10175): Verilog HDL warning at memory_block.v(35): ignoring unsupported system task File: D:/project3/memory_block.v Line: 35
+Warning (10175): Verilog HDL warning at memory_block.v(43): ignoring unsupported system task File: D:/project3/memory_block.v Line: 43
+Info (10041): Inferred latch for "memory[0][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[0][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[1][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[2][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[3][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[4][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[5][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[6][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[7][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[8][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[9][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[10][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[11][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[12][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[13][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[14][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[15][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[16][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[17][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[18][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[19][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[20][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[21][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[22][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[23][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[24][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[25][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[26][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[27][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[28][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[29][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[30][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[31][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[32][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[33][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[34][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[35][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[36][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[37][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[38][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[39][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[40][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[41][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[42][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[43][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[44][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[45][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[46][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[47][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[48][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[49][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[50][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[51][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[52][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[53][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[54][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[55][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[56][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[57][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[58][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[59][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[60][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[61][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[62][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[63][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[64][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[65][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[66][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[67][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[68][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[69][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[70][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[71][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[72][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[73][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[74][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[75][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[76][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[77][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[78][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[79][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[80][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[81][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[82][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[83][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[84][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[85][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[86][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[87][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[88][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[89][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[90][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[91][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[92][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[93][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[94][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[95][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[96][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[97][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[98][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[99][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[100][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[101][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[102][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[103][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[104][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[105][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[106][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[107][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[108][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[109][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[110][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[111][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[112][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[113][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[114][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[115][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[116][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[117][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[118][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[119][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[120][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[121][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[122][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[123][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[124][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[125][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[126][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][0]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][1]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][2]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][3]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][4]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][5]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][6]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "memory[127][7]" at memory_block.v(32) File: D:/project3/memory_block.v Line: 32
+Info (10041): Inferred latch for "read_data[0]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[1]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[2]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[3]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[4]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[5]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[6]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[7]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[8]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[9]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[10]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[11]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[12]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[13]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[14]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[15]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[16]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[17]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[18]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[19]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[20]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[21]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[22]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[23]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[24]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[25]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[26]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[27]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[28]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[29]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[30]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (10041): Inferred latch for "read_data[31]" at memory_block.v(19) File: D:/project3/memory_block.v Line: 19
+Info (12128): Elaborating entity "shift_left_2" for hierarchy "shift_left_2:shift_left_2_sign_extended" File: D:/project3/mips.v Line: 113
+Info (17049): 12 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file D:/project3/output_files/mips.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "clock" File: D:/project3/mips.v Line: 1
+Info (21057): Implemented 1 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 1 input pins
+    Info (21059): Implemented 0 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info: Peak virtual memory: 4817 megabytes
+    Info: Processing ended: Thu Jan 18 23:37:59 2024
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:07
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/project3/output_files/mips.map.smsg.
+
+

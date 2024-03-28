@@ -1,0 +1,6 @@
+
+State Machine - |alu|mod:mod_inst|mod_cu:control_unit|state
+Name state.START state.END state.SUBTRACT 
+state.START 0 0 0 
+state.SUBTRACT 1 0 1 
+state.END 1 1 0 
