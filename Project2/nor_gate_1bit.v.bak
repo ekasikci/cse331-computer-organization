@@ -1,0 +1,7 @@
+module nor_gate_1bit(
+    input a,
+    input b,
+    output out
+);
+    nor nor_gate(out, a, b);
+endmodule

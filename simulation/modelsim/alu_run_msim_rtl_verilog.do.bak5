@@ -1,0 +1,17 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/alu.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/and_gate_32bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/and_gate_1bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/or_gate_1bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/or_gate_32bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/xor_gate_1bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/xor_gate_32bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/nor_gate_1bit.v}
+vlog -vlog01compat -work work +incdir+D:/project2 {D:/project2/nor_gate_32bit.v}
+

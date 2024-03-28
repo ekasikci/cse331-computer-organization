@@ -1,0 +1,150 @@
+`timescale 1ns / 1ps
+
+module testbench;
+
+reg clk;
+reg [31:0] A, B;
+reg [2:0] ALUop;
+wire [31:0] Result;
+
+// Instantiate the ALU module
+alu myALU(
+    .clk(clk),
+    .A(A),
+    .B(B),
+    .ALUop(ALUop),
+    .Result(Result)
+);
+
+// Clock generation
+initial clk = 0;
+always #10 clk = ~clk; // 100 MHz clock
+
+initial begin
+    // Initialize inputs
+    A = 0;
+    B = 0;
+    ALUop = 0;
+	 
+    // Test AND operation
+    A = 32'hFFFFFFFF;  // All 1s
+    B = 32'hAAAAAAAA;  // Alternating 1s and 0s
+    ALUop = 3'b000;    // AND operation code
+    #10;               // Wait for 10 time units
+    $display("AND Test: A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test OR operation
+    A = 32'h55555555;  // Alternating 0s and 1s
+    B = 32'hAAAAAAAA;  // Alternating 1s and 0s
+    ALUop = 3'b001;    // OR operation code
+    #10;
+    $display("OR Test: A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test XOR operation
+    A = 32'h55555555;  // Alternating 0s and 1s
+    B = 32'hAAAAAAAA;  // Alternating 1s and 0s
+    ALUop = 3'b010;    // XOR operation code
+    #10;
+    $display("XOR Test: A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test NOR operation
+    A = 32'h0;         // All 0s
+    B = 32'h0;         // All 0s
+    ALUop = 3'b011;    // NOR operation code
+    #10;
+    $display("NOR Test: A = %h, B = %h, Result = %h", A, B, Result);
+	 
+		
+
+    // Test ADD operation
+    A = 32'h12345678;  // Example number
+    B = 32'h87654321;  // Example number
+    ALUop = 3'b101;    // ADD operation code
+    #10;
+    $display("ADD Test: A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Additional ADD tests with different scenarios
+        // Test ADD operation with overflow
+    A = 32'hFFFFFFFF;  // Max 32-bit number
+    B = 32'h1;         // Add 1
+    ALUop = 3'b101;    // ADD operation code
+    #10;
+    $display("ADD Overflow Test: A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test ADD operation with zero
+    A = 32'h12345678;  // Example number
+    B = 32'h0;         // Add 0
+    ALUop = 3'b101;    // ADD operation code
+    #10;
+    $display("ADD Zero Test: A = %h, B = %h, Result = %h", A, B, Result);
+	 
+	 // Test SUB operation - Simple case
+    A = 32'h5;  // Example value
+    B = 32'h3;  // Example value
+    ALUop = 3'b110;    // SUB operation code
+    #10;
+    $display("SUB Test (Simple): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test SUB operation - Underflow
+    A = 32'h0;
+    B = 32'h1;
+    ALUop = 3'b110;    // SUB operation code
+    #10;
+    $display("SUB Test (Underflow): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test SUB operation - Large numbers
+    A = 32'h12345678;
+    B = 32'h87654321;
+    ALUop = 3'b110;    // SUB operation code
+    #10;
+    $display("SUB Test (Large Numbers): A = %h, B = %h, Result = %h", A, B, Result);
+	 
+	 
+	 // Test MOD Operation - Basic Case
+	 A = 32'd21;  // Example value
+	 B = 32'd4;   // Example value
+	 ALUop = 3'b111;    // MOD operation code
+	 #100; // Wait sufficient time for the operation to complete
+	 $display("MOD Test (Basic): A = %h, B = %h, Result = %h", A, B, Result);
+
+	 
+	 // Test MOD Operation - Basic
+    A = 32'h3; 
+	 B = 32'h15;  
+    ALUop = 3'b111;    // MOD operation code
+    #100;
+    $display("MOD Test (Basic): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test MOD Operation - A Equals B
+    A = 32'h7;  
+    B = 32'h7; 
+    ALUop = 3'b111;    // MOD operation code
+    #100;
+    $display("MOD Test (A Equals B): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test MOD Operation - A Less Than B
+    A = 32'h3;  
+    B = 32'h5; 
+    ALUop = 3'b111;    // MOD operation code
+    #100;
+    $display("MOD Test (A Less Than B): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test MOD Operation - Large Numbers
+    A = 32'h12345678;  
+    B = 32'h89ABCDEF;  
+    ALUop = 3'b111;    // MOD operation code
+    #100;
+    $display("MOD Test (Large Numbers): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Test MOD Operation - Zero A
+    A = 32'h0; 
+    B = 32'h5;  
+    ALUop = 3'b111;    // MOD operation code
+    #100;
+    $display("MOD Test (Zero A): A = %h, B = %h, Result = %h", A, B, Result);
+
+    // Finish simulation
+    $finish;
+end
+
+endmodule

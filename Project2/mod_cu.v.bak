@@ -1,0 +1,43 @@
+module mod_cu(
+    input clk,
+    input reset,
+    input start,
+    input TEMP_lt_B,
+    output reg subtract_enable,
+    output reg done
+);
+
+    // State encoding
+    reg [1:0] state, next_state;
+    localparam START = 2'b00,
+               SUBTRACT = 2'b01,
+               CHECK = 2'b10,
+               DONE = 2'b11;
+
+    // State transition logic
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            state <= START;
+        end else begin
+            state <= next_state;
+        end
+    end
+
+    // Next state logic
+    always @(*) begin
+        case (state)
+            START: next_state = start ? SUBTRACT : START;
+            SUBTRACT: next_state = CHECK;
+            CHECK: next_state = TEMP_lt_B ? DONE : SUBTRACT;
+            DONE: next_state = START;
+            default: next_state = START;
+        endcase
+    end
+
+    // Output logic
+    always @(*) begin
+        subtract_enable = (state == SUBTRACT);
+        done = (state == DONE);
+    end
+
+endmodule
